@@ -1,0 +1,23 @@
+.person-col{
+  padding: 16px 5px;
+  border-bottom: 1px dashed #bbb;
+  display: flex;
+}
+
+.person-col:hover{
+  background: #eee;
+}
+
+.col-name{
+  flex-basis: 0;
+  flex-grow: 9;
+}
+
+.item-delete{
+  flex-basis: 0;
+  flex-grow: 1;
+  text-align: right;
+  color: #fb7b0e;
+  font-weight: bold;
+  cursor: pointer;
+}
