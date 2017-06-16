@@ -1,12 +1,18 @@
 import React, {Component} from 'react';
 
 var AddForm = React.createClass({
+
+	handleCancel: function(e){
+		e.preventDefault();
+		this.props.onCancel();
+	},
+	
 	handleAdd: function(e){
 		e.preventDefault();
 		var fname = document.getElementById('txt_fname').value;
 		var lname = document.getElementById('txt_lname').value;
 		var contact = document.getElementById('txt_contact').value;
-		console.log(this.props)
+
 		var data ={
 			first_name: fname,
 			last_name: lname,
@@ -29,7 +35,7 @@ var AddForm = React.createClass({
 				<input type='text' name='txt_contact' id='txt_contact'/>
 				<br/>
 				<button className="button form-button " onClick={this.handleAdd} id="btn_save">Save</button>
-				<button className="button danger form-button " onClick={this.cancel} id="btn_cancel">Cancel</button>
+				<button className="button danger form-button " onClick={this.handleCancel} id="btn_cancel">Cancel</button>
 			</form>
 		)
 	}

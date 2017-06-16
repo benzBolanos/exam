@@ -110,8 +110,7 @@ class BodyWrapper extends Component {
 		})
 	}
 
-	cancel(e){
-		e.preventDefault();
+	cancel(){
 		var formAddElem = document.getElementById('form-content-add');
 		formAddElem.style.display = 'none';
 	}
@@ -148,10 +147,10 @@ class BodyWrapper extends Component {
 
 		return (
 			<div id="person-list">
-				<AddForm onAdd={this.onAdd} id="form-content-add"/>
+				<AddForm onAdd={this.onAdd} onCancel={this.cancel} id="form-content-add"/>
 					
 
-				<form ref="form_edit" style={{display:'none'}} id="form-content-edit">
+				<form ref="form_edit" style={{display:test}} id="form-content-edit">
 					<label htmlFor="txt_fname_edit">First Name: </label>
 					<input type='text' name='txt_fname_edit' id='txt_fname_edit' ref="first_name"/>
 					<br/>
