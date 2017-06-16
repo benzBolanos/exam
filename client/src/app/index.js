@@ -109,6 +109,10 @@ class BodyWrapper extends Component {
 			cur.setState({
 				persons: updatePersons
 			})
+
+			document.getElementById('txt_fname').value="";
+			document.getElementById('txt_lname').value="";
+			document.getElementById('txt_contact').value="";
 		})
 	}
 
@@ -126,13 +130,11 @@ class BodyWrapper extends Component {
 		})
 	}
 
-	componentDidUpdate(){
-		var formAddElem = document.getElementById('form-content-add');
-		formAddElem.style.display = 'none';
-	}
-
 	componentDidMount(){
 		var cur = this;
+		var formAddElem = document.getElementById('form-content-add');
+		formAddElem.style.display = 'none';
+
 		CRUD.get('/person',function(data){
 			cur.setState({
 				persons: data.data
@@ -165,7 +167,7 @@ class BodyWrapper extends Component {
 					<button className="button form-button " onClick={this.onAdd} id="btn_save">Save</button>
 					<button className="button danger form-button " onClick={this.cancel} id="btn_cancel">Cancel</button>
 				</form>
-				<form ref="form_edit" style={{display:test}} id="form-content-edit">
+				<form ref="form_edit" style={{display:'none'}} id="form-content-edit">
 					<label htmlFor="txt_fname_edit">First Name: </label>
 					<input type='text' name='txt_fname_edit' id='txt_fname_edit' ref="first_name"/>
 					<br/>
