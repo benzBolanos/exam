@@ -7,6 +7,7 @@ var CRUD = require('./services/crud');
 
 //------- Lists Items --------------
 var PersonItem = require('./personItem');
+var AddForm = require('./addForm');
 
 //-------- include css ------------
 require('./css/style.css');
@@ -88,21 +89,11 @@ class BodyWrapper extends Component {
 		formAddElem.style.display = 'block';
 	}
 
-	onAdd(e){
-		e.preventDefault();
+	onAdd(txt_data){
+		console.log(txt_data)
 		var cur = this;
 
-		var fname = document.getElementById('txt_fname').value;
-		var lname = document.getElementById('txt_lname').value;
-		var contact = document.getElementById('txt_contact').value;
-
-		var postData = {
-			first_name: fname,
-			last_name: lname,
-			contact_number: contact
-		}
-
-		CRUD.post('/person',postData,function(data){
+		CRUD.post('/person',txt_data,function(data){
 			var updatePersons = cur.state.persons;
 			updatePersons.unshift(data.data)
 
@@ -113,6 +104,9 @@ class BodyWrapper extends Component {
 			document.getElementById('txt_fname').value="";
 			document.getElementById('txt_lname').value="";
 			document.getElementById('txt_contact').value="";
+
+			var formAddElem = document.getElementById('form-content-add');
+			formAddElem.style.display = 'none';
 		})
 	}
 
@@ -154,19 +148,9 @@ class BodyWrapper extends Component {
 
 		return (
 			<div id="person-list">
-				<form id="form-content-add">
-					<label htmlFor="txt_fname">First Name: </label>
-					<input type='text' name='txt_fname' id='txt_fname'/>
-					<br/>
-					<label htmlFor="txt_lname">Last Name: </label>
-					<input type='text' name='txt_lname' id='txt_lname'/>
-					<br/>
-					<label htmlFor="txt_contact">Contact #: </label>
-					<input type='text' name='txt_contact' id='txt_contact'/>
-					<br/>
-					<button className="button form-button " onClick={this.onAdd} id="btn_save">Save</button>
-					<button className="button danger form-button " onClick={this.cancel} id="btn_cancel">Cancel</button>
-				</form>
+				<AddForm onAdd={this.onAdd} id="form-content-add"/>
+					
+
 				<form ref="form_edit" style={{display:'none'}} id="form-content-edit">
 					<label htmlFor="txt_fname_edit">First Name: </label>
 					<input type='text' name='txt_fname_edit' id='txt_fname_edit' ref="first_name"/>
