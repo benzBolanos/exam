@@ -3,7 +3,7 @@ var Person = require('../models/persons');
 
 Router
 	.get('/person',function(req,res){
-		var personList = Person.find({}).exec();
+		var personList = Person.find({}).sort({_id:-1}).exec();
 		personList
 			.then(function(data){
 				console.log(data);

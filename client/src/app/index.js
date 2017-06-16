@@ -104,7 +104,7 @@ class BodyWrapper extends Component {
 
 		CRUD.post('/person',postData,function(data){
 			var updatePersons = cur.state.persons;
-			updatePersons.push(data.data)
+			updatePersons.unshift(data.data)
 
 			cur.setState({
 				persons: updatePersons
